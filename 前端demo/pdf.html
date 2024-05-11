@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>base64转译</title>
+  <style>
+    *{
+      margin:0 auto;
+      padding:0;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" style="display:block;margin:50px auto">
+  <textarea style="display:block;padding:10px;" cols="200" rows="50"></textarea>
+  <img src="http://uat.tjseaweedman.misnew.ikang.com/api/seaweed/download?a=7j%2F04%2FQD6DKFJhMByygxDIbDzwf021aL69oWiq50LEo%3D&b=1667359041292&token=1e3ed053f88e55d0dc3ed3790bf72ef71edde6725b73abc69a62b6b2786f7599">
+</body>
+</html>
+<script>
+  let file = document.querySelector('input')
+
+  let container = document.querySelector('textarea')
+
+  file.onchange = function(e){
+    let data = e.target.files[0]
+    let reader = new FileReader()
+    reader.readAsDataURL(data)
+    
+    reader.onload = function (ev) {
+      let base64 = ev.target.result
+      container.innerHTML = base64
+    }
+  }
+  
+  // location.href =  "http://uat.tjseaweedman.misnew.ikang.com/api/seaweed/download?a=7j%2F04%2FQD6DKFJhMByygxDIbDzwf021aL69oWiq50LEo%3D&b=1667359041292&token=1e3ed053f88e55d0dc3ed3790bf72ef71edde6725b73abc69a62b6b2786f7599"
+  // window.open('http://uat.tjseaweedman.misnew.ikang.com/api/seaweed/download?a=7j%2F04%2FQD6DKFJhMByygxDIbDzwf021aL69oWiq50LEo%3D&b=1667359041292&token=1e3ed053f88e55d0dc3ed3790bf72ef71edde6725b73abc69a62b6b2786f7599')
+</script>

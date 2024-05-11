@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+    }
+    html,body{
+      width:100%;
+      height:100%;
+      background: #ccc;
+    }
+    .start{
+      padding:10px 20px;
+      margin:50px auto 0;
+      display:block;
+    }
+    .container{
+      background: #fff;
+      width:800px;
+      height:500px;
+      margin:10px auto;
+      position:relative;
+    }
+  </style>
+</head>
+<body>
+  <button class="start">Start</button>
+  <div class="container"></div>
+</body>
+</html>
+<script>
+  function Food(){
+    this.width = 20;
+    this.height = 20;
+    this.parent = document.querySelector('.container')
+    this.appear = function(){
+      var div = document.createElement('div')
+      div.style.width = this.width + 'px'
+      div.style.height = this.height + 'px'
+
+      div.style.left = Math.trunc(Math.random() * this.parent.offsetWidth / this.width ) * this.width + 'px'
+      div.style.top = Math.trunc(Math.random() * this.parent.offsetHeight / this.height) * this.height + 'px'
+
+      div.style.borderRadius = '50%'
+      div.style.position = 'absolute'
+      div.style.background = 'red'
+      this.parent.appendChild(div)
+    }
+  }
+  let food = new Food()
+  food.appear()
+</script>
+
+<script>
+  function Snake(){
+    this.parent = document.querySelector('.container')
+    this.body = [
+      { x: 2, y: 0},
+      { x: 1, y: 0},
+      { x: 0, y: 0}
+    ],
+    this.appear = function(){
+      this.body.forEach((item,index)=>{
+        var div = document.createElement('div')
+        div.style.height = '20px'
+        div.style.width = '20px'
+
+        div.style.left = item.x * 20 + 'px'
+        div.style.top = item.y * 20 + 'px'
+
+        div.style.borderRadius = '50%'
+        div.style.position = 'absolute'
+        if(index == 0){
+          div.style.background = '#afc'
+        } else {
+          div.style.background = 'blue'
+        }
+        this.parent.appendChild(div)
+      })
+    }
+
+    this.clear = function(){
+      const bodyDom = document.querySelectorAll('div')
+      bodyDom.forEach.call(Array,(item=>{
+        console.log(item)
+        this.parent.removeChild(item)
+      }))
+    }
+
+    this.move = function(){
+      const {x,y} = this.body[0]
+      const head = { x:x+1,y }
+      this.body.unshift(head)
+      this.body.length--
+      this.clear()
+      this.appear()
+    }
+  }
+  let snake = new Snake()
+  snake.appear()
+  snake.move()
+
+
+
+
+  // [1,2,3,4] -> [x,1,2,3]
+</script>

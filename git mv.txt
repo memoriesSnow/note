@@ -1,0 +1,5 @@
+git mv 修改文件名（大小写）
+git mv src/views/Sales/index.vue src/views/Sales/Index.vue 可以直接修改文件名的大小写
+
+修改目录的大小写
+git mv src/views/Sales temp (将这个路径下的一切文件暂存到temp变量名中) git mv temp src/views/sales (在换回来)

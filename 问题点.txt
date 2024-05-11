@@ -1,0 +1,23 @@
+1.获取dom
+vue3没有vue2的this,所以无法this.$refs.xxx
+vue3 ref获取dom :
+<div ref="textRef"></div> 
+<script lang="ts" setup>
+import { ref } from 'vue'
+const textRef = ref<any>(null) // 变量名称与ref名称相同
+<script>
+
+2.TS !.操作符
+当使用 a.xxx   提示:a可能为undefined时, 改为a!.xxx 可以告诉TS我确定a是存在的,不会为undefined
+告诉后边的表达式，前面的内容确实存在
+
+3.defineExpose
+父组件想通过ref使用子组件内容，子组件内需要使用defineExpose暴露数据，父组件才可以使用
+
+
+Record<string,any>声明对象的key value类型
+
+
+4.toRef : const a = toRef('object(对象名)', 'key(键名)') 使单个值成为响应式
+  toRefs: const { name } =  toRefs(object) 从响应式对象中解构获取里面的响应式属性
+  toRaw ： toRaw(object) 把reactive响应式对象变成普通对象，避免影响页面渲染

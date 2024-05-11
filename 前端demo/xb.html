@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>11</title>
+</head>
+
+<style>
+  body {
+    background: #ccc;
+  }
+
+  #content {
+    font-size: 30px;
+    text-align: center;
+    letter-spacing: 5px;
+  }
+</style>
+
+<body>
+  <div id="container">
+    <div id="content"></div>
+  </div>
+</body>
+
+</html>
+<script>
+  var a = prompt('你几点下班啊', '18:30')
+
+  var year = new Date().getFullYear();
+  var hour = new Date().getMonth() + 1;
+  var day = new Date().getDate();
+  var str = `${year}/${hour}/${day} ${a}:00`
+
+  function calcTime(str) {
+    var date = new Date();
+    var now = date.getTime();
+    console.log(now);
+    var endDate = new Date(str).getTime();
+    var time = endDate - now;
+    if (time >= 0) {
+      h = Math.floor(time / 1000 / 60 / 60 % 24);
+      m = Math.floor(time / 1000 / 60 % 60);
+      s = Math.floor(time / 1000 % 60);
+      var contentArr = `距离下班还有${h}时${m}分${s}秒`
+      document.getElementById('content').innerText = contentArr
+    } else {
+      alert('芜湖，回家！')
+      clearInterval(timer)
+      document.getElementById('content').innerText = '还愣着干啥，回家!!'
+    }
+  }
+  // calcTime()
+  var timer = setInterval('calcTime(str)', 1000)
+  window.onload = calcTime(str)
+</script>

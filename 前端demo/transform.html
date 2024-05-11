@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="container">
+    <div><p class="title">输入</p><textarea id="input"></textarea></div>
+    <div><button id="operation">转化</button></div>
+    <div><p class="title">输出</p><div id="output"></div></div>
+  </div>
+</body>
+</html>
+<script>
+  const input = document.querySelector('#input')
+  const output = document.querySelector('#output')
+  const button = document.querySelector('#operation')
+  button.addEventListener('click', getText)
+
+  function getText(){
+    const originData = input.value
+    console.log(originData)
+    let dataArr = originData.split('\n')
+    dataArr = dataArr.map(item=>{
+      return splitArea(item)
+    })
+    const dom = createTable(dataArr)
+    output.innerHTML = dom
+  }
+
+  function splitArea(value){
+    // 获取省 市 区下标
+    const proIndex = value.indexOf('省')
+    const cityIndex = value.indexOf('市')
+    const areaIndex = value.indexOf('区')
+    // 根据下标截取省市区内容
+    const province = value.substring(0,proIndex + 1)
+    const city = value.substring(proIndex + 1,cityIndex + 1)
+    const area = value.substring(cityIndex + 1, areaIndex + 1)
+    // 集成在数组内
+    return [province,city,area]
+  }
+
+  function createTable(arr){
+    let dom = '<table border="1">'
+    arr.forEach(item=>{
+      dom += '<tr>'
+      item.forEach(data=>{
+        dom+=`<td>${data}</td>`
+      })
+      dom += '</tr>'
+    })
+    dom +='</table>'
+    return dom
+  }
+
+</script>
+<style>
+*{
+  user-select: none;
+}
+#container{
+  display: flex;
+  width:100%;
+  justify-content: space-around;
+}
+#input{
+  width:600px;
+  height:800px;
+  font-size:20px;
+}
+#output{
+  width:600px;
+  height:800px;
+  font-size:20px;
+  border:solid 1px #000;
+  float:right;
+}
+table,tbody,tr,td{
+  user-select: text;
+}
+.title{
+  text-align: center;
+  font-size: 20px;
+  font-weight:600;
+}
+button{
+  transform: translate(0,400px);
+}
+</style>

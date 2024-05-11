@@ -1,0 +1,16 @@
+<script>
+  let str = 'ru'
+  console.log(str.repeat(1))
+  /***
+   * 递归repeat
+   * string为原字符串
+   * count 为加倍次数,即将原字符串repeat二的count次方
+  */
+  function doubleRepeat(string,count){
+    if (count === 0) {
+      return string
+    }
+    return doubleRepeat(string.repeat(2),count-1)
+  }
+  console.log(doubleRepeat(str,4))
+</script>
